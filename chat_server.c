@@ -144,6 +144,12 @@ int main()
                         {
                             send(clients[i].fd, "Invalid input format. Please send 'client_id: client_name' again\n", strlen("Invalid input format. Please send 'client_id: client_name' again\n"), 0);
                             close(clients[i].fd);
+                            for (int j = i; j < num_clients - 1; j++)
+                            {
+                                clients[j] = clients[j + 1];
+                            }
+                            num_clients--;
+                            i--;
                             continue;
                         }
                         strcpy(clients[i].client_name, client_name);
